@@ -1,0 +1,80 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 I -Collect Customer Details 
+      %br
+      %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
+        - can = can? :edit, @icol_customer
+        %a.btn{:href => "#{!(can) ? '#' : '/icol_customers/' + @icol_customer.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        = render 'unapproved_records/approve', :@record => @icol_customer
+      %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
+        - if !@icol_customer.nil?
+          %tr
+            %td.label Version
+            %td.value
+              = link_to "#{audit_count(@icol_customer)}", :controller => :icol_customers, :action => :audit_logs, :version_id => audit_count(@icol_customer), :id => @icol_customer.id
+          %tr
+            %td.label Enabled?
+            %td
+              = @icol_customer.is_enabled
+            %td#msg-error
+              = error_message_for(@icol_customer, :is_enabled, :prepend_text => "")
+          %tr
+            %td.label App Code
+            %td.value
+              = @icol_customer.app_code
+            %td
+          %tr
+            %td.label Customer Code
+            %td.value
+              = @icol_customer.customer_code
+            %td
+          %tr
+            %td.label Validate URL
+            %td.value
+              = @icol_customer.validate_url
+            %td
+          %tr
+            %td.label Notify URL
+            %td.value
+              = @icol_customer.notify_url
+            %td
+          %tr
+            %td.label HTTP Username
+            %td.value
+              = @icol_customer.http_username
+            %td
+          %tr
+            %td.label Retry Notify (in mins)
+            %td.value
+              = @icol_customer.retry_notify_in_mins
+            %td
+          %tr
+            %td.label Max. Retries for Notify
+            %td.value
+              = @icol_customer.max_retries_for_notify
+            %td
+          %tr
+            %td.label Created At
+            %td.value
+              = @icol_customer.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
+          %tr
+            %td.label Updated At
+            %td.value
+              = @icol_customer.updated_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+            %td
+          %tr
+            - if @icol_customer.settings_cnt.present? and @icol_customer.settings_cnt > 0
+              %table.table.datatable{style: 'width: 50%'}
+                %thead
+                  %tr
+                    %th Setting Name
+                    %th Setting Value
+                %tbody
+                  - (1..@icol_customer.settings_cnt).each do |i|
+                    %tr
+                      %td
+                        = @icol_customer.send("setting#{i}_name")
+                      %td
+                        = @icol_customer.send("setting#{i}_value")

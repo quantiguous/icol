@@ -1,0 +1,101 @@
+.show_ticket
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 100%; height: 600px;display: inline-block;'}
+    %h3
+      Audit Steps:
+    %br
+    = will_paginate @steps
+    %br
+    %table.table.table-bordered.table-striped.table-hover{:style=>'background-color: #F1F2F8;'}
+      .thead
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Step Name
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Attempt No
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Request
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Request Header
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          URI
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Requested At
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Reply
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Reply Header
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Replied At
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Fault Code
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Fault Text
+        %th{:style=>'text-align:left; background-color: lightblue;'}
+          Fault Result
+      .tbody
+        - @steps.each do |value|
+          %tr
+            %td{:style=>'text-align:left;'}
+              = value.step_name
+            %td{:style=>'text-align:left;'}
+              = value.attempt_no   
+            %td{:style=>'text-align:left;'}
+              = link_to "Show Request", "#", :class => 'val-request-link', :href => "javascript:void()", data: { request: value.req_bitstream }
+            %td{:style=>'text-align:left;'}
+              = link_to "Show Request Header", "#", :class => 'val-req-header-link', :href => "javascript:void()", data: { request: value.req_header }
+            %td{:style=>'text-align:left;'}
+              = link_to "Show URI", "#", :class => 'val-url-link', :href => "javascript:void()", data: { host: value.remote_host, uri: value.req_uri }
+            %td{:style=>'text-align:left;'}
+              = value.req_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            %td{:style=>'text-align:left;'}
+              = link_to "Show Response", "#", :class => 'val-reply-link', :href => "javascript:void()", data: { reply: value.rep_bitstream }
+            %td{:style=>'text-align:left;'}
+              = link_to "Show Response Header", "#", :class => 'val-rep-header-link', :href => "javascript:void()", data: { reply: value.rep_header }
+            %td{:style=>'text-align:left;'}
+              = value.rep_timestamp.try(:strftime, "%d/%m/%Y %I:%M%p") rescue ""
+            %td{:style=>'text-align:left;'}
+              = value.fault_code   
+            %td{:style=>'text-align:left;'}
+              - if !value.fault_reason.nil?
+                = link_to "Show Fault Text", "#", :class => 'active-link', :href => "javascript:void()", data: { fault_reason: value.fault_reason, fault_code: value.fault_code, fault_subcode: value.fault_subcode} 
+              - else
+                = '-' 
+            %td{:style=>'text-align:left;'}
+              - if value.fault_bitstream.present?
+                = link_to "Show Fault", "#", :class => 'val-fault-link', :href => "#faultLink", data: { fault: value.fault_bitstream }
+              - else 
+                = '-'
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code: 
+        %td
+          %label.fault_code{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault SubCode: 
+        %td
+          %label.fault_subcode{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Fault Reason:
+        %td
+          %label.fault_reason{:style => 'word-wrap: break-word'}
+#urlText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 URL
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    %table.table.no-border
+      %tr
+        %td.label Remote Host: 
+        %td
+          %label.remote_host{:style => 'word-wrap: break-word'}
+      %tr
+        %td.label Request URI:
+        %td
+          %label.req_uri{:style => 'word-wrap: break-word'}
+= render partial: 'icol_validate_steps/modal_boxes'

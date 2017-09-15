@@ -1,0 +1,46 @@
+= simple_form_for @icol_notify_transaction, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "icol_notify_transaction_form"} do |f|
+  .control-group
+    = f.label ' '
+    #msg-error
+      = error_message_for(@icol_notify_transaction, :base, :prepend_text => "")
+
+  .form-main{:style=>"width: 100%;"}
+    .control-group
+      = f.label :compny_id, "*Company Id", :class => 'control-label'
+      = f.text_field :compny_id
+      #msg-error
+        = error_message_for(@icol_notify_transaction, :compny_id, :prepend_text => "")
+    .control-group
+      = f.label :comapny_name, "*Company Name", :class => 'control-label'
+      = f.text_field :comapny_name, :maxlength => 100
+      #msg-error
+        = error_message_for(@icol_notify_transaction, :comapny_name, :prepend_text => "")
+    .control-group
+      = f.label :template_id, "*Template Id", :class => 'control-label'
+      = f.text_field :template_id
+      #msg-error
+        = error_message_for(@icol_notify_transaction, :template_id, :prepend_text => "")
+    .control-group
+      = f.label :template_data, "*Template Data", :class => 'control-label'
+      = f.text_area :template_data, :maxlength => 1000
+      #msg-error
+        = error_message_for(@icol_notify_transaction, :template_data, :prepend_text => "")
+    .control-group
+      = f.label :trnsctn_mode, "*Transaction Mode", :class => 'control-label'
+      = f.text_field :trnsctn_mode, :maxlength => 3
+      #msg-error
+        = error_message_for(@icol_notify_transaction, :trnsctn_mode, :prepend_text => "")
+    .control-group
+      = f.label :trnsctn_nmbr, "*Transaction Number", :class => 'control-label'
+      = f.text_field :trnsctn_nmbr
+      #msg-error
+        = error_message_for(@icol_notify_transaction, :trnsctn_nmbr, :prepend_text => "")
+    .control-group
+      = f.label :payment_status, "*Payment Status", :class => 'control-label'
+      = f.text_field :payment_status, :maxlength => 3
+      #msg-error
+        = error_message_for(@icol_notify_transaction, :payment_status, :prepend_text => "")
+  .form-actions
+    - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
+    = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_notify_transaction', :value => label_name + ' Notify Transaction'
+    = link_to :Cancel,'/icol_notify_transactions', :name => 'cancel', :class=>"cancel btn"

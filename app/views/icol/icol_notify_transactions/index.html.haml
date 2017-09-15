@@ -1,0 +1,43 @@
+%br
+= link_to 'New I-Collect Notify Transaction', new_icol_notify_transaction_path
+%br
+%br
+%h1 Listing of I-Collect Notify Transactions
+%br
+= "Total Count: #{@icol_notify_transactions_count}"
+%br
+= will_paginate @icol_notify_transactions
+%br
+
+%table.table.table-bordered.table-striped.table-hover
+  %thead
+    %tr
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+      %th{:style=>'text-align:left; background-color: lightblue;'}
+      %th{:style=>'text-align:left; background-color: lightblue;'} 
+        Company Name
+      %th{:style=>'text-align:left; background-color: lightblue;'} 
+        Transaction Mode
+      %th{:style=>'text-align:left; background-color: lightblue;'} 
+        Transaction Number
+      %th{:style=>'text-align:left; background-color: lightblue;'} 
+        Payment Status
+
+  %tbody
+    - @icol_notify_transactions.each do |icol_notify_transaction|
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', icol_notify_transaction
+        %td{:style=>'text-align:left;'}
+          = link_to 'Edit', edit_icol_notify_transaction_path(icol_notify_transaction)
+        %td{:style=>'text-align:left;'}
+          = link_to 'Delete', icol_notify_transaction, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td{:style=>'text-align:left;'}
+          = icol_notify_transaction.comapny_name
+        %td{:style=>'text-align:left;'}
+          = icol_notify_transaction.trnsctn_mode
+        %td{:style=>'text-align:left;'}
+          = icol_notify_transaction.trnsctn_nmbr
+        %td{:style=>'text-align:left;'}
+          = icol_notify_transaction.payment_status

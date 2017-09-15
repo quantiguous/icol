@@ -1,0 +1,37 @@
+%h2.collapsible
+  Advanced Search
+  %span.caret
+.collapsible-content
+  = form_tag icol_notifications_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
+    .control-group
+      #msg-error
+        - @searcher.errors.full_messages.each do |msg|
+          = msg
+          %br
+    .control-group
+      = label_tag "App Code", "App Code", :class => 'control-label'
+      = text_field_tag :app_code, params[:app_code]
+    .control-group
+      = label_tag "Customer Code", "Customer Code", :class => 'control-label'
+      = text_field_tag :customer_code, params[:customer_code]
+    .control-group
+      = label_tag "Transaction Number", "Transaction Number", :class => 'control-label'
+      = text_field_tag :txn_number, params[:txn_number]
+    .control-group
+      = label_tag "Status Code", "Status Code", :class => 'control-label'
+      / what  are options should be ?
+      = select_tag :status_code, options_for_select([['NEW','NEW'],['COMPLETED','COMPLETED']],params[:status_code]),:prompt => 'ANY'
+    .control-group
+      = label_tag "Payment Status", "Payment Status", :class => 'control-label'
+      / what  are options should be ?
+      = select_tag :payment_status, options_for_select([['NEW','NEW'],['COMPLETED','COMPLETED']],params[:payment_status]),:prompt => 'ANY'
+      = hidden_field_tag :page, params[:page] || 1
+    .form-actions
+      = submit_tag "Search", :name => nil, :class => 'btn btn-primary', :id => "adv_search_button",onclick: "$('#page').val(1)"
+      = button_tag "Reset", :type => 'button', :value=>'Reset', :class => 'btn', :id => 'adv_search_reset_button'
+
+- if @searcher.errors.present?
+  :javascript
+    $('.collapsible-content').show(); 
+
+= advanced_search_page_links

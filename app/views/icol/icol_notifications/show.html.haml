@@ -1,0 +1,92 @@
+.form-horizontal.show_form
+  .form-main-with-color{:style=>'background-color: #F1F2F8;'}
+    #form-details
+      %h3 I -Colllect Notification
+      %br
+
+.show_ticket
+  .header-form-main{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3 
+      Customer Code:
+      = @icol_notification.customer_code
+    %h3 
+      App Code:
+      = @icol_notification.app_code
+    %h3
+      Created At:
+      = @icol_notification.created_at.try(:strftime, "%d/%m/%Y %I:%M%p")
+  .header-form-extended{:style=>'background-color: #ecf5fa; width: 50%; height: 150px; display: inline-block;'}
+    %h3
+      Status:
+      = @icol_notification.status_code
+      - if @icol_notification.status_code == "FAILED"
+        = link_to "Fault Text", "#", :class => 'fault-link', :href => "#faultText", :style => "font-weight:100"
+    %h3
+      Payment Status:
+      = @icol_notification.payment_status
+    %h3
+      Transaction Number:
+      = @icol_notification.txn_number
+    %h3
+      Audit Steps:
+      = link_to 'Show', audit_steps_icol_notification_path(@icol_notification)
+
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
+    #ticket-details
+    %h3 Details:
+    %table.table.no-border{:style=>"table-layout: fixed; width: 100%"}
+      %tr
+        %td.label Transaction Mode
+        %td.value
+          = @icol_notification.txn_mode
+      %tr
+        %td.label Transaction Date
+        %td.value
+          = @icol_notification.txn_date.try(:strftime, "%d/%m/%Y %I:%M%p")
+      %tr
+        %td.label Template Data
+        %td.value
+          = @icol_notification.template_data
+      %tr
+        %td.label Template ID
+        %td.value
+          = @icol_notification.template_id
+      %tr
+        %td.label Pending Approval
+        %td.value
+          = @icol_notification.pending_approval
+      %tr
+        %td.label Company Id
+        %td.value
+          = @icol_notification.company_id
+      %tr
+        %td.label Attempt No
+        %td.value
+          = @icol_notification.attempt_no
+      %tr
+        %td.label Pending Approval
+        %td.value
+          = @icol_notification.pending_approval
+  .header-form-main{:style=>'background-color: #F1F2F8; width: 50%; height: 450px; display: inline-block;'}
+
+            
+= render partial: 'icol_validate_steps/modal_boxes'
+
+#faultText.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Fault Text
+    #error_message{:style => 'color:red'}
+  .modal-body{:style => "max-height:450px;"}
+    .demo-area
+    %pre#fault_text{:style => 'word-wrap: break-word'}
+    %table.table.no-border
+      %tr
+        %td.label Fault Code:
+        %td= @icol_notification.fault_code
+      %tr
+        %td.label Fault SubCode:
+        %td= @icol_notification.fault_subcode
+      %tr
+        %td.label Fault Reason:
+        %td= @icol_notification.fault_reason

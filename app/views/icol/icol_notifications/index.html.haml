@@ -1,0 +1,39 @@
+%br
+%br
+%h1 Listing I-Collect Notifications
+= render :partial => 'advanced_search'
+%br
+%br
+%table.table.table-bordered.table-striped.table-hover
+  .thead
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      App Code
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Customer Code
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Transaction Mode
+    %th{:style=>'Text-align:left; background-color: lightblue;'}
+      Tansaction Number
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Status
+    %th{:style=>'text-align:left; background-color: lightblue;'}
+      Payment Status
+      
+  .tbody
+    - @records.each do |record|   
+      %tr
+        %td{:style=>'text-align:left;'}
+          = link_to 'Show', record
+        %td{:style=>'text-align:left;'}
+          = record.app_code
+        %td{:style=>'text-align:left;'}
+          = record.customer_code
+        %td{:style=>'text-align:left;'}
+          = record.txn_mode
+        %td{:style=>'text-align:left;'}
+          = record.txn_number
+        %td{:style=>'text-align:left;'}
+          = record.status_code
+        %td{:style=>'text-align:left;'}
+          = record.payment_status
