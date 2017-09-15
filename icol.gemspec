@@ -9,14 +9,15 @@ Gem::Specification.new do |s|
   s.version     = Icol::VERSION
   s.authors     = ["divyajayan"]
   s.email       = ["divya.jayan@quantiguous.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Icol."
-  s.description = "TODO: Description of Icol."
-  s.license     = "MIT"
+  s.homepage    = "http://www.quantiguous.com"
+  s.summary     = "APIBanking: Icollect"
+  s.description = "APIBanking: Icollect"
+  s.license     = "Commercial"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 4.2.0"
+  s.add_dependency 'approval2', '0.1.7'
 
   s.add_development_dependency "sqlite3"
 end
