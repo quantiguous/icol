@@ -1,4 +1,4 @@
-class IcolNotificationsController < ApplicationController
+class NotificationsController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
@@ -7,19 +7,19 @@ class IcolNotificationsController < ApplicationController
   
   def index
     if request.get?
-      @searcher = IcolNotificationSearcher.new(params.permit(:page))
+      @searcher = NotificationSearcher.new(params.permit(:page))
     else
-      @searcher = IcolNotificationSearcher.new(search_params)
+      @searcher = NotificationSearcher.new(search_params)
     end
     @records = @searcher.paginate
   end
   
   def show
-    @icol_notification = IcolNotification.find(params[:id])
+    @icol_notification = Notification.find(params[:id])
   end
   
   def audit_steps
-    icol_notification = IcolNotification.find(params[:id])
+    icol_notification = Notification.find(params[:id])
     steps = icol_notification.icol_notify_steps
     @steps = steps.order("id desc").paginate(page: params[:page], per_page: 10)
   end

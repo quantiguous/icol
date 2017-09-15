@@ -1,4 +1,4 @@
-class IcolNotifyTransactionsController < ApplicationController
+class NotifyTransactionsController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
@@ -6,11 +6,11 @@ class IcolNotifyTransactionsController < ApplicationController
   include ApplicationHelper
   
   def new
-    @icol_notify_transaction = IcolNotifyTransaction.new
+    @icol_notify_transaction = NotifyTransaction.new
   end
 
   def create
-    @icol_notify_transaction = IcolNotifyTransaction.new(params[:icol_notify_transaction])
+    @icol_notify_transaction = NotifyTransaction.new(params[:icol_notify_transaction])
     if !@icol_notify_transaction.valid?
       render "new"
     else
@@ -21,11 +21,11 @@ class IcolNotifyTransactionsController < ApplicationController
   end
 
   def edit
-    @icol_notify_transaction = IcolNotifyTransaction.find(params[:id])
+    @icol_notify_transaction = NotifyTransaction.find(params[:id])
   end
 
   def update
-    @icol_notify_transaction = IcolNotifyTransaction.find(params[:id])
+    @icol_notify_transaction = NotifyTransaction.find(params[:id])
     @icol_notify_transaction.attributes = params[:icol_notify_transaction]
     if !@icol_notify_transaction.valid?
       render "edit"
@@ -37,17 +37,17 @@ class IcolNotifyTransactionsController < ApplicationController
   end
 
   def index
-    icol_notify_transactions = IcolNotifyTransaction.order("crtd_date_time desc")
+    icol_notify_transactions = NotifyTransaction.order("crtd_date_time desc")
     @icol_notify_transactions_count = icol_notify_transactions.count
     @icol_notify_transactions = icol_notify_transactions.paginate(:per_page => 10, :page => params[:page]) rescue []
   end
 
   def show
-    @icol_notify_transaction = IcolNotifyTransaction.find(params[:id])
+    @icol_notify_transaction = NotifyTransaction.find(params[:id])
   end
 
   def destroy
-    icol_notify_transaction = IcolNotifyTransaction.find(params[:id])
+    icol_notify_transaction = NotifyTransaction.find(params[:id])
     if icol_notify_transaction.destroy
       flash[:alert] = "Notify Transaction record has been deleted!"
     else

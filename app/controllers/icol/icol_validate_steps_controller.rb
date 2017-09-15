@@ -1,4 +1,4 @@
-class IcolValidateStepsController < ApplicationController
+class ValidateStepsController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
@@ -7,15 +7,15 @@ class IcolValidateStepsController < ApplicationController
   
   def index
     if request.get?
-      @searcher = IcolValidateStepSearcher.new(params.permit(:page))
+      @searcher = ValidateStepSearcher.new(params.permit(:page))
     else
-      @searcher = IcolValidateStepSearcher.new(search_params)
+      @searcher = ValidateStepSearcher.new(search_params)
     end
     @records = @searcher.paginate
   end
   
   def show
-    @validate_step = IcolValidateStep.find_by_id(params[:id])
+    @validate_step = ValidateStep.find_by_id(params[:id])
   end
   
   private

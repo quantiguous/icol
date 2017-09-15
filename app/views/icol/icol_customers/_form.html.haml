@@ -55,7 +55,7 @@
               %td
                 = f.text_field "setting#{i}_name"
               %td
-                = f.select "setting#{i}_type", options_for_select(IcolCustomer::SETTING_TYPES, @icol_customer.send("setting#{i}_type"))
+                = f.select "setting#{i}_type", options_for_select(Customer::SETTING_TYPES, @icol_customer.send("setting#{i}_type"))
               %td
                 = f.text_field "setting#{i}_value"
   .form-actions

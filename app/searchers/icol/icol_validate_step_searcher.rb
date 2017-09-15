@@ -1,4 +1,4 @@
-class IcolValidateStepSearcher
+class ValidateStepSearcher
   include ActiveModel::Validations
   attr_accessor :page, :app_code, :customer_code, :step_name, :status_code, :from_request_timestamp, :to_request_timestamp, :from_reply_timestamp, :to_reply_timestamp
   PER_PAGE = 10
@@ -13,7 +13,7 @@ class IcolValidateStepSearcher
     if valid? 
       find.paginate(per_page: PER_PAGE, page: page)
     else
-      IcolValidateStep.none.paginate(per_page: PER_PAGE, page: page)
+      ValidateStep.none.paginate(per_page: PER_PAGE, page: page)
     end
   end
 
@@ -23,7 +23,7 @@ class IcolValidateStepSearcher
   end
 
   def find
-    reln = IcolValidateStep.order("id desc")
+    reln = ValidateStep.order("id desc")
     reln = reln.where("app_code=?", app_code) if app_code.present?
     reln = reln.where("customer_code=?", customer_code) if customer_code.present?
     reln = reln.where("step_name=?", step_name) if step_name.present?

@@ -1,4 +1,4 @@
-class IcolNotifyTransaction < Invxp
+class NotifyTransaction < Invxp
   self.primary_key = :trnsctn_nmbr
   self.table_name = "trnsctn_stt"
   before_validation :set_created_at

@@ -1,4 +1,4 @@
-class IcolCustomersController < ApplicationController
+class CustomersController < ApplicationController
   authorize_resource
   before_filter :authenticate_user!
   before_filter :block_inactive_user!
@@ -7,30 +7,30 @@ class IcolCustomersController < ApplicationController
   include ApplicationHelper
 
   def new
-    @icol_customer = IcolCustomer.new
+    @icol_customer = Customer.new
   end
 
   def create
-    @icol_customer = IcolCustomer.new(icol_customer_params)
+    @icol_customer = Customer.new(icol_customer_params)
     if !@icol_customer.valid?
       render "new"
     else
       @icol_customer.created_by = current_user.id
       @icol_customer.save!
-      flash[:alert] = 'IcolCustomer successfully created and is pending for approval'
+      flash[:alert] = 'Customer successfully created and is pending for approval'
       redirect_to @icol_customer
     end
   end
 
   def update
-    @icol_customer = IcolCustomer.unscoped.find_by_id(params[:id])
+    @icol_customer = Customer.unscoped.find_by_id(params[:id])
     @icol_customer.attributes = params[:icol_customer]
     if !@icol_customer.valid?
       render "edit"
     else
       @icol_customer.updated_by = current_user.id
       @icol_customer.save!
-      flash[:alert] = 'IcolCustomer successfully modified successfully'
+      flash[:alert] = 'Customer successfully modified successfully'
       redirect_to @icol_customer
     end
     rescue ActiveRecord::StaleObjectError
@@ -40,20 +40,20 @@ class IcolCustomersController < ApplicationController
   end 
 
   def show
-    @icol_customer = IcolCustomer.unscoped.find_by_id(params[:id])
+    @icol_customer = Customer.unscoped.find_by_id(params[:id])
   end
 
   def index
     if request.get?
-      @searcher = IcolCustomerSearcher.new(params.permit(:page, :approval_status))
+      @searcher = CustomerSearcher.new(params.permit(:page, :approval_status))
     else
-      @searcher = IcolCustomerSearcher.new(search_params)
+      @searcher = CustomerSearcher.new(search_params)
     end
     @records = @searcher.paginate
   end
 
   def audit_logs
-    @record = IcolCustomer.unscoped.find(params[:id]) rescue nil
+    @record = Customer.unscoped.find(params[:id]) rescue nil
     @audit = @record.audits[params[:version_id].to_i] rescue nil
   end
 

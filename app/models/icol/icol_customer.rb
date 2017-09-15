@@ -1,4 +1,4 @@
-class IcolCustomer < ActiveRecord::Base
+class Customer < ActiveRecord::Base
   include Approval2::ModelAdditions
   
   belongs_to :created_user, class_name: 'User', foreign_key: 'created_by'
