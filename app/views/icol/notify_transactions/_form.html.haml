@@ -43,4 +43,4 @@
   .form-actions
     - (f.object.new_record?) ? label_name = "Create" : label_name = "Update"
     = f.button "submit" ,:class=>"btn btn-primary", :id => 'submit_notify_transaction', :value => label_name + ' Notify Transaction'
-    = link_to :Cancel,'/icol_notify_transactions', :name => 'cancel', :class=>"cancel btn"
+    = link_to :Cancel, notify_transactions_path, :name => 'cancel', :class=>"cancel btn"

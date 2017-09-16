@@ -27,7 +27,7 @@ module Icol
   
     def update
       @icol_notify_transaction = NotifyTransaction.find(params[:id])
-      @icol_notify_transaction.attributes = params[:icol_notify_transaction]
+      @icol_notify_transaction.attributes = notify_transaction_params
       if !@icol_notify_transaction.valid?
         render "edit"
       else

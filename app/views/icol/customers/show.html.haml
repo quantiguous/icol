@@ -5,14 +5,14 @@
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @icol_customer
-        %a.btn{:href => "#{!(can) ? '#' : '/icol_customers/' + @icol_customer.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+         %a.btn{:href => "#{!(can) ? '#' : edit_customer_path(@customer)}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit 'disabled'}"} Edit
         = render 'unapproved_records/approve', :@record => @icol_customer
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@icol_customer.nil?
           %tr
             %td.label Version
             %td.value
-              = link_to "#{audit_count(@icol_customer)}", :controller => :icol_customers, :action => :audit_logs, :version_id => audit_count(@icol_customer), :id => @icol_customer.id
+              = link_to "#{audit_count(@customer)}", audit_logs_customer_path(@customer, :version_id => audit_count(@customer))
           %tr
             %td.label Enabled?
             %td

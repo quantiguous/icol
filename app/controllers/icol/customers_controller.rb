@@ -25,7 +25,7 @@ module Icol
   
     def update
       @icol_customer = Customer.unscoped.find_by_id(params[:id])
-      @icol_customer.attributes = params[:icol_customer]
+      @customer.attributes = customer_params
       if !@icol_customer.valid?
         render "edit"
       else
