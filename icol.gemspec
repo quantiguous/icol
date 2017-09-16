@@ -20,4 +20,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'approval2', '0.1.7'
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "spork", "> 0.9.0.rc"
+  s.add_development_dependency "webmock"
+  s.add_development_dependency "codeclimate-test-reporter", "0.5.0"
+  s.add_development_dependency "factory_girl", "2.2.0"
+  s.add_development_dependency 'database_cleaner', '< 1.1.0'
+  s.add_development_dependency 'flexmock'
 end
