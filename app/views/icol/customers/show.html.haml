@@ -5,7 +5,7 @@
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
         - can = can? :edit, @icol_customer
-         %a.btn{:href => "#{!(can) ? '#' : edit_customer_path(@customer)}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit 'disabled'}"} Edit
+         %a.btn{:href => "#{!(can) ? '#' : edit_customer_path(@customer)}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
         = render 'unapproved_records/approve', :@record => @icol_customer
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
         - if !@icol_customer.nil?
