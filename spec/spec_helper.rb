@@ -16,6 +16,7 @@ Spork.prefork do
   # Spork.trap_class_method(FactoryGirl, :find_definitions)
   require File.expand_path("../dummy/config/environment", __FILE__)
   require 'rspec/rails'
+  require 'shoulda/matchers'
   require 'rspec/autorun'
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -28,6 +29,10 @@ Spork.prefork do
     # config.mock_with :flexmock
     # config.mock_with :rr
     config.mock_with :flexmock
+    
+    config.before(:all) do
+      FactoryGirl.reload
+    end
 
     # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -41,12 +46,11 @@ Spork.prefork do
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = false
+    
+    config.include Devise::TestHelpers, :type => :controller
+    config.include Icol::Engine.routes.url_helpers
 
-    dbs = [ DatabaseCleaner[:active_record, { :connection => :fcr_test }],
-            DatabaseCleaner[:active_record, { :connection => :fcatrt_test }],
-            DatabaseCleaner[:active_record, { :connection => :atom_test }],
-            DatabaseCleaner[:active_record, { :connection => :upi_test }],
-            DatabaseCleaner[:active_record, { :connection => :invxp_test }],
+    dbs = [ DatabaseCleaner[:active_record, { :connection => :invxp_test }],
             DatabaseCleaner[:active_record, { :connection => :test }]
           ]
 

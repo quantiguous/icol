@@ -2,7 +2,7 @@
   Advanced Search
   %span.caret
 .collapsible-content
-  = form_tag icol_notifications_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
+  = form_tag notifications_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
     .control-group
       #msg-error
         - @searcher.errors.full_messages.each do |msg|

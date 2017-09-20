@@ -1,5 +1,5 @@
 module Icol
   class Notification < ActiveRecord::Base
-    has_many :icol_notify_steps
+    has_many :notify_steps
   end
 end

@@ -1,4 +1,4 @@
 module Icol
-  class IcolApp < ActiveRecord::Base
+  class App < ActiveRecord::Base
   end
 end

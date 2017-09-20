@@ -20,6 +20,10 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+invxp_test:
+  <<: *default
+  database: db/test_invxp.sqlite3
+  
 production:
   <<: *default
   database: db/production.sqlite3

@@ -2,7 +2,7 @@
   Advanced Search
   %span.caret
 .collapsible-content
-  = form_tag icol_validate_steps_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
+  = form_tag validate_steps_path, :method => :put, :class => 'form-horizontal', :autocomplete=>"off", id: 'advanced_search' do
     .control-group
       = label_tag "App Code", "App Code", :class => 'control-label'
       = text_field_tag :app_code, params[:app_code]

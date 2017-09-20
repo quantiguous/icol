@@ -4,54 +4,54 @@
       %h3 I-Collect Notify Transaction 
       %br
       %p{:style => 'text-align:left; padding-left:6px; padding-bottom:17px'}
-        - can = can? :edit, @icol_notify_transaction
-        %a.btn{:href => "#{!(can) ? '#' : '/icol_notify_transactions/' + @icol_notify_transaction.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
+        - can = can? :edit, @notify_transaction
+        %a.btn{:href => "#{!(can) ? '#' : '/icol_notify_transactions/' + @notify_transaction.id.to_s + '/edit'}", :role => "button", :class => "btn btn-primary #{(can) ? '' : 'disabled'}"} Edit
 
       %table.table.no-border{:style=>"table-layout: fixed; width: 100%;"}
-        - if !@icol_notify_transaction.nil?
+        - if !@notify_transaction.nil?
           %tr
             %td.label Company Id
             %td.value
-              = @icol_notify_transaction.compny_id
+              = @notify_transaction.compny_id
             %td
           %tr
             %td.label Company Name
             %td.value
-              = @icol_notify_transaction.comapny_name
+              = @notify_transaction.comapny_name
             %td
           %tr
             %td.label Transaction Mode
             %td.value
-              = @icol_notify_transaction.trnsctn_mode
+              = @notify_transaction.trnsctn_mode
             %td
           %tr
             %td.label Transaction Number
             %td.value
-              = @icol_notify_transaction.trnsctn_nmbr
+              = @notify_transaction.trnsctn_nmbr
             %td
           %tr
             %td.label Payment Status
             %td.value
-              = @icol_notify_transaction.payment_status
+              = @notify_transaction.payment_status
             %td
           %tr
             %td.label Template ID
             %td.value
-              = @icol_notify_transaction.template_id
+              = @notify_transaction.template_id
             %td          
           %tr
             %td.label Template Data
             %td.value
-              = @icol_notify_transaction.template_data
+              = @notify_transaction.template_data
             %td
           %tr
             %td.label Template Data
             %td.value
-              = @icol_notify_transaction.template_data
+              = @notify_transaction.template_data
             %td
           %tr
             %td.label Created At
             %td.value
-              = @icol_notify_transaction.crtd_date_time.try(:strftime, "%d/%m/%Y %I:%M%p")
+              = @notify_transaction.crtd_date_time.try(:strftime, "%d/%m/%Y %I:%M%p")
             %td
-      = link_to 'Back to Notify Transcations', icol_notify_transactions_path
+      = link_to 'Back to Notify Transcations', notify_transactions_path

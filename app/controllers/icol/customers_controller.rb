@@ -8,40 +8,40 @@ module Icol
     include ApplicationHelper
   
     def new
-      @icol_customer = Customer.new
+      @customer = Customer.new
     end
   
     def create
-      @icol_customer = Customer.new(icol_customer_params)
-      if !@icol_customer.valid?
+      @customer = Customer.new(customer_params)
+      if !@customer.valid?
         render "new"
       else
-        @icol_customer.created_by = current_user.id
-        @icol_customer.save!
+        @customer.created_by = current_user.id
+        @customer.save!
         flash[:alert] = 'Customer successfully created and is pending for approval'
-        redirect_to @icol_customer
+        redirect_to @customer
       end
     end
   
     def update
-      @icol_customer = Customer.unscoped.find_by_id(params[:id])
+      @customer = Customer.unscoped.find_by_id(params[:id])
       @customer.attributes = customer_params
-      if !@icol_customer.valid?
+      if !@customer.valid?
         render "edit"
       else
-        @icol_customer.updated_by = current_user.id
-        @icol_customer.save!
+        @customer.updated_by = current_user.id
+        @customer.save!
         flash[:alert] = 'Customer successfully modified successfully'
-        redirect_to @icol_customer
+        redirect_to @customer
       end
       rescue ActiveRecord::StaleObjectError
-        @icol_customer.reload
+        @customer.reload
         flash[:alert] = 'Someone edited the customer the same time you did. Please re-apply your changes to the customer.'
         render "edit"
     end 
   
     def show
-      @icol_customer = Customer.unscoped.find_by_id(params[:id])
+      @customer = Customer.unscoped.find_by_id(params[:id])
     end
   
     def index
@@ -59,13 +59,13 @@ module Icol
     end
   
     def approve
-      redirect_to unapproved_records_path(group_name: 'icol')
+      redirect_to main_app.unapproved_records_path(group_name: 'icol')
     end
   
     private
   
-    def icol_customer_params
-      params.require(:icol_customer).permit(:customer_code, :app_code, :settings_cnt, 
+    def customer_params
+      params.require(:customer).permit(:customer_code, :app_code, :settings_cnt, 
       :lock_version, :last_action, :updated_by, :notify_url, :validate_url, 
       :http_username, :http_password, :approval_status, :approved_version, 
       :approved_id, :max_retries_for_notify, :retry_notify_in_mins,

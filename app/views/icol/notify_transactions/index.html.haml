@@ -1,5 +1,5 @@
 %br
-= link_to 'New I-Collect Notify Transaction', new_icol_notify_transaction_path
+= link_to 'New I-Collect Notify Transaction', new_notify_transaction_path
 %br
 %br
 %h1 Listing of I-Collect Notify Transactions
@@ -25,19 +25,19 @@
         Payment Status
 
   %tbody
-    - @icol_notify_transactions.each do |icol_notify_transaction|
+    - @icol_notify_transactions.each do |notify_transaction|
       %tr
         %td{:style=>'text-align:left;'}
-          = link_to 'Show', icol_notify_transaction
+          = link_to 'Show', notify_transaction
         %td{:style=>'text-align:left;'}
-          = link_to 'Edit', edit_icol_notify_transaction_path(icol_notify_transaction)
+          = link_to 'Edit', edit_notify_transaction_path(notify_transaction)
         %td{:style=>'text-align:left;'}
-          = link_to 'Delete', icol_notify_transaction, :method => :delete, :data => { :confirm => 'Are you sure?' }
+          = link_to 'Delete', notify_transaction, :method => :delete, :data => { :confirm => 'Are you sure?' }
         %td{:style=>'text-align:left;'}
-          = icol_notify_transaction.comapny_name
+          = notify_transaction.comapny_name
         %td{:style=>'text-align:left;'}
-          = icol_notify_transaction.trnsctn_mode
+          = notify_transaction.trnsctn_mode
         %td{:style=>'text-align:left;'}
-          = icol_notify_transaction.trnsctn_nmbr
+          = notify_transaction.trnsctn_nmbr
         %td{:style=>'text-align:left;'}
-          = icol_notify_transaction.payment_status
+          = notify_transaction.payment_status

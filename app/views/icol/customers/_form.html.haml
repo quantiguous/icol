@@ -1,8 +1,8 @@
-= simple_form_for @icol_customer, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "customer_form"} do |f|
+= simple_form_for @customer, :html => {:class=>'form-horizontal', :autocomplete=>"off", :id => "customer_form"} do |f|
   .control-group
-    - if @icol_customer.errors.any?
+    - if @customer.errors.any?
       #msg-error
-        - @icol_customer.errors.full_messages.each do |msg|
+        - @customer.errors.full_messages.each do |msg|
           = msg
           %br
   .form-main
@@ -14,7 +14,7 @@
       = f.label :is_enabled, "Enabled?", :class => 'control-label'
       = f.check_box :is_enabled, {},"Y","N"
       #msg-error
-        = error_message_for(@icol_customer, :is_enabled, :prepend_text => "")
+        = error_message_for(@customer, :is_enabled, :prepend_text => "")
     .control-group
       = f.label :app_code, "*App Code", :class => 'control-label'
       = f.text_field :app_code, maxlength: 50
@@ -55,7 +55,7 @@
               %td
                 = f.text_field "setting#{i}_name"
               %td
-                = f.select "setting#{i}_type", options_for_select(Customer::SETTING_TYPES, @icol_customer.send("setting#{i}_type"))
+                = f.select "setting#{i}_type", options_for_select(Icol::Customer::SETTING_TYPES, @customer.send("setting#{i}_type"))
               %td
                 = f.text_field "setting#{i}_value"
   .form-actions
